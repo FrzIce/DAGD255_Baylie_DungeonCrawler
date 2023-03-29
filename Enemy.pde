@@ -1,21 +1,18 @@
-class Circle {
-  float x, y;
-  float diameter;
-  float angle;
+class Enemy extends AABB{
   
-  Circle(float xPos, float yPos) {
+  Enemy(float xPos, float yPos) {
     x = xPos;
     y = yPos;
-    diameter = random(50, 150);
+    setSize(100, 100);
   }
   
   void update() {
-    
+    super.update();
   }
   
   void draw() {
     fill(0, 0, 255);
-    ellipse(x, y, diameter, diameter);
+    rect(x - halfW, y - halfH, w, h);
   }
   
   void calcAngleToPlayer() {
