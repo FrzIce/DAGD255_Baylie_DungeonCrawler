@@ -7,7 +7,7 @@ float smoothSpeed = 0.125;
 ArrayList<Circle> circles = new ArrayList();
 
 void setup() {
- size(1000, 1000);
+ size(1000, 1000, P2D);
  
  player = new Player(500, 500);
  camera = new Camera(player);
