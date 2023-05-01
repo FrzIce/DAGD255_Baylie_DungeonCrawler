@@ -17,9 +17,12 @@ class Wall extends AABB {
     super.update();
     if(type == 1){
      fill(#006F13); 
-    }
-    else if(type == 2){
+    }else if(type == 2){
      fill(#C9E1FF); 
+    }else if(type == 3){
+     fill(#7C0A04); 
+    }else if(type == 4){     
+     fill(#817600); 
     }
 
     if (checkCollision(player)) {

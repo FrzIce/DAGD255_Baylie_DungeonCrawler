@@ -6,7 +6,7 @@ class Player extends AABB {
   boolean isFocused = false;
   boolean isHovered = false;
 
-  int element; //1 - Nature, 2 - Ice, 3 - Fire, 4 - Earth, 5 - Air 
+  int element; //1 - Nature, 2 - Ice, 3 - Fire v1,    4 - Earth, 5 - Air v2 
   int weapon; //1 and 2 - implemented later
 
   //Level up system
@@ -53,12 +53,16 @@ class Player extends AABB {
       calcAngleToMouse();
 
       if (leftPressed && !pLeftPressed) {
-        float bx = x + cos(angle) * halfW; //pushing the bullet to spawn at the tip of the player
+        float bx = x + cos(angle) * halfW; //pushing the Shock to spawn at the tip of the player
         float by = y + sin(angle) * halfH;
-        Bullet b = new Bullet(bx, by, angle, 10); 
-        bullets.add(b);
+        Shock b = new Shock(bx, by, angle, 10); 
+        Shocks.add(b);
       }
 
+      if (Keyboard.onDown(Keyboard.Q)) {
+         if (element <= 4) element++;
+         else element = 1;
+      }
       if (Keyboard.onDown(Keyboard.E)) {
         if (camTarget != null) {
           camera.target = camTarget;

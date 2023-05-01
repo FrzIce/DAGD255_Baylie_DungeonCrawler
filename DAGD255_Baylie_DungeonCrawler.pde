@@ -1,8 +1,18 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+// This program plays an Dungeoun Crawler type game
+// Copyright Trevor Baylie 2023
+
 float dt = 0;
 float prevTime = 0;
 boolean leftPressed, rightPressed, pLeftPressed, pRightPressed;
 float enemyTimer = 2;
-int Biome = 2; // 1 - Jungle, 2 - Artic, 3 - Volcano, 4 - Desert, 5 - Lightning Field
+int Biome = 4; // 1 - Jungle, 2 - Artic, 3 - Volcano, 4 - Desert v1     5 - Lightning Field v2
 int weapon = 1; // 1 - first weapon v1, 2 - second weapon
 
 Player player, player2;
@@ -17,10 +27,12 @@ float backgroundColor = #676767;
 
 Jungle jungle;
 Artic artic;
+Desert desert;
+Volcano volcano;
 
 ArrayList<Circle> circles = new ArrayList();
 ArrayList<Enemy> enemies = new ArrayList();
-ArrayList<Bullet> bullets = new ArrayList();
+ArrayList<Shock> Shocks = new ArrayList();
 
 ArrayList<StickyBomb> stickys = new ArrayList();
 
@@ -39,7 +51,9 @@ void setup() {
   } else if (Biome == 2) {
     artic = new Artic();
   } else if (Biome == 3) {
+    desert = new Desert();
   } else if (Biome == 4) {
+    volcano = new Volcano();
   } else if (Biome == 5) {
   }
 
@@ -74,7 +88,9 @@ void draw() {
   } else if (Biome == 2) {
     artic.update();
   } else if (Biome == 3) {
+    desert.update();
   } else if (Biome == 4) {
+    volcano.update();
   } else if (Biome == 5) {
   }
 
@@ -92,8 +108,8 @@ void draw() {
     if (enemyTimer <= 0) {
       Enemy e = new Enemy(random(-950, 950), random(-950, 950));
       enemies.add(e); 
-      for (int i = 0; i < bullets.size(); i++) {
-        Bullet b = bullets.get(i);
+      for (int i = 0; i < Shocks.size(); i++) {
+        Shock b = Shocks.get(i);
         b.enemiesNotCollided.add(e);
       }
       enemyTimer = 1;
@@ -155,13 +171,13 @@ void draw() {
       }
     }
 
-    for (int i = 0; i < bullets.size(); i++) {
-      Bullet b = bullets.get(i);
+    for (int i = 0; i < Shocks.size(); i++) {
+      Shock b = Shocks.get(i);
       b.update();
 
 
 
-      // testing to cause collision at first hit but stop after it is hit the first time so we can get the bullet to richoeat
+      // testing to cause collision at first hit but stop after it is hit the first time so we can get the Shock to richoeat
       for (int l = 0; l < b.enemiesNotCollided.size(); l++) {
         Enemy n = b.enemiesNotCollided.get(l);      
 
@@ -181,7 +197,7 @@ void draw() {
         }
       }
 
-      if (b.isDead) bullets.remove(i);
+      if (b.isDead) Shocks.remove(i);
     }
 
 
@@ -212,7 +228,9 @@ void draw() {
   } else if (Biome == 2) {
     artic.draw();
   } else if (Biome == 3) {
+    desert.draw();
   } else if (Biome == 4) {
+    volcano.draw();
   } else if (Biome == 5) {
   }
   
@@ -235,8 +253,8 @@ void draw() {
   }
 
 
-  for (int i = 0; i < bullets.size(); i++) {
-    Bullet b = bullets.get(i);
+  for (int i = 0; i < Shocks.size(); i++) {
+    Shock b = Shocks.get(i);
     b.draw();
   }
   player.draw();

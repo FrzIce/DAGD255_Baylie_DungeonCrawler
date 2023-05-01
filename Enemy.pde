@@ -41,10 +41,10 @@ class Enemy extends AABB {
       fill(#C9E1FF);
     }
     else if (type == 3){
-      
+      fill(#7C0A04); 
     }
     else if (type == 4){
-      
+      fill(#817600);
     }
     
     rect(x - halfW, y - halfH, w, h);

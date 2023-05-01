@@ -1,4 +1,4 @@
-class StickyBomb extends AABB { // Made by Ethan P
+class StickyBomb extends AABB { // Made by Ethan P - StickBomb class
 
   float damage;
   float lifeTime = 5.3;

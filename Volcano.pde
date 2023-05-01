@@ -1,9 +1,8 @@
 class Volcano {
-  
+  PImage Img;
 
   Volcano() {
-    background(#006F13);
-    fill(#006F13);
+    Img = loadImage("volcano.png");
     walls.add(new Wall(-1050, -1050, 50, 2100, 3)); //left
     walls.add(new Wall(1000, -1050, 50, 2100, 3)); //right
     walls.add(new Wall(-1050, 1000, 2100, 50, 3)); //bottom
@@ -16,7 +15,6 @@ class Volcano {
   }
 
   void draw() {
-    fill(#006F13);
-    square(-1000, -1000, 2000);
+    image(Img, -1000, -1000);
   }
 }

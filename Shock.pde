@@ -1,4 +1,4 @@
-class Bullet extends AABB {
+class Shock extends AABB {
   float damage;
   float lifeTime = 4;
   boolean colliding;
@@ -8,7 +8,7 @@ class Bullet extends AABB {
   ArrayList<Enemy> enemiesNotCollided = new ArrayList();
 
 
-  Bullet(float x, float y, float angle, float damage) {
+  Shock(float x, float y, float angle, float damage) {
     this.x = x;
     this.y = y;
     this.angle = angle;
@@ -43,7 +43,9 @@ class Bullet extends AABB {
   }
 
   void draw() {
-    fill(#000000);
+    stroke(5);
+    fill(#FCE800);
     ellipse(x, y, w, h);
+    noStroke();
   }
 }
