@@ -255,11 +255,11 @@ class ScenePlay {
       text("Press which button you would like to level up", width/2, height-200);
       textAlign(CENTER, TOP);
       fill(0, 0, 25);
-      text("Z - Health", width/2, height-80);
+      text("X - Attack", width/2, height-80);
       textSize(40);
       textAlign(CENTER, TOP);
       fill(0, 0, 25);
-      text("X - Attack", width/3-30, height-80);
+      text("Z - Health", width/3-30, height-80);
       textAlign(CENTER, TOP);
       fill(0, 0, 25);
       text("C - Defense", 2*width/3+30, height-80);

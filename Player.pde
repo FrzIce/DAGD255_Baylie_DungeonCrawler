@@ -6,7 +6,7 @@ class Player extends AABB {
   boolean isFocused = false;
   boolean isHovered = false;
 
-  int element; //1 - Nature, 2 - Ice, 3 - Fire v1,    4 - Earth, 5 - Air v2 
+  int element; //1 - Nature, 2 - Ice, 3 - Fire v1,    4 - Earth v2,    5 - Air v1 
   int weapon; //1 and 2 - implemented later
 
   //Level up system
@@ -142,7 +142,19 @@ class Player extends AABB {
       popMatrix();
     }
 
-
+    if(element == 1){ // nature
+      
+    }
+    else if(element == 2){ // ice
+      
+    }
+    else if(element == 3){ // fire
+      
+    }
+    else if(element == 4){ // air for now
+      
+    }
+    
     //stroke(2);
     //line(edgeL, edgeT, edgeL, edgeB);
     //line(edgeR, edgeT, edgeR, edgeB);
