@@ -1,9 +1,8 @@
 class Artic {
-  
+  PImage Img;
 
   Artic() {
-    background(#006F13);
-    fill(#006F13);
+    Img = loadImage("artic.jpg");
     walls.add(new Wall(-1050, -1050, 50, 2100, 2)); //left
     walls.add(new Wall(1000, -1050, 50, 2100, 2)); //right
     walls.add(new Wall(-1050, 1000, 2100, 50, 2)); //bottom
@@ -16,7 +15,7 @@ class Artic {
   }
 
   void draw() {
-    fill(#006F13);
-    square(-1000, -1000, 2000);
+    image(Img, -1000, -1000);
+    //square(-1000, -1000, 2000);
   }
 }

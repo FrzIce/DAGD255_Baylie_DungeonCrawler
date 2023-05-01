@@ -5,22 +5,23 @@ class Player extends AABB {
   float playerSpeed = 300;
   boolean isFocused = false;
   boolean isHovered = false;
-  
-  int Element; //1 - Nature, 2 - Ice, 3 - Fire, 4 - Earth, 5 - Air 
-  int Weapon; 
-  
+
+  int element; //1 - Nature, 2 - Ice, 3 - Fire, 4 - Earth, 5 - Air 
+  int weapon; //1 and 2 - implemented later
+
   //Level up system
   int level = 1; // starts at exp 100 plus 50 each time, etc 100, 150, 200
   int levelUpToken = 0;
   int exp = 0; // certain difference between levels - 1.5/2?
   int expCap = 100;
   //Attributes
+  int maxHealth = 50;
   int health = 50; // How much health the player has
   float attack = 1; // influences how much damage is done against enemies
   float defense = 1; // influences how much damage is reduced against you
   //float speed = 10; // how fast you can move as well as how much stamina you have
   //float luck; // increase chances to crits and more exp.
-  
+
 
 
   Player(float xPos, float yPos) {
@@ -31,17 +32,21 @@ class Player extends AABB {
     setSize(106, 128);
     sprint = 1;
     level = 1;
+    element = 1;
+    
   }
 
   void update() {
 
+    if (health <= 0) exit();
+
     if (isFocused) {//UPDATE INPUT ACTIONS IF THIS PLAYER IS IN FOCUS
 
       //println(player.x);
-      if(exp >= expCap){
-       exp -= expCap;
-       expCap += 50;
-       levelUpToken++;       
+      if (exp >= expCap) {
+        exp -= expCap;
+        expCap += 50;
+        levelUpToken++;
       }
 
 
@@ -61,21 +66,24 @@ class Player extends AABB {
           this.isFocused = false;
         }
       }
-      
-      if (Keyboard.onDown(Keyboard.Z)){
-        levelUpToken--;
-        level++;
-        health += 10;
-      }
-      if (Keyboard.onDown(Keyboard.X)){
-        levelUpToken--;
-        level++;
-        attack += 1;
-      }
-      if (Keyboard.onDown(Keyboard.C)){
-        levelUpToken--;
-        level++;
-        defense += 1;
+
+      if (levelUpToken > 0) {
+        if (Keyboard.onDown(Keyboard.Z)) {
+          levelUpToken--;
+          level++;
+          maxHealth += 10;
+          health = maxHealth;
+        }
+        if (Keyboard.onDown(Keyboard.X)) {
+          levelUpToken--;
+          level++;
+          attack += 1;
+        }
+        if (Keyboard.onDown(Keyboard.C)) {
+          levelUpToken--;
+          level++;
+          defense += 1;
+        }
       }
 
       if (Keyboard.isDown(Keyboard.A)) {
@@ -129,8 +137,8 @@ class Player extends AABB {
       image(img, -halfW, -halfH);
       popMatrix();
     }
-    
-    
+
+
     //stroke(2);
     //line(edgeL, edgeT, edgeL, edgeB);
     //line(edgeR, edgeT, edgeR, edgeB);

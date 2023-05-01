@@ -15,6 +15,12 @@ class Wall extends AABB {
 
   void update() {
     super.update();
+    if(type == 1){
+     fill(#006F13); 
+    }
+    else if(type == 2){
+     fill(#C9E1FF); 
+    }
 
     if (checkCollision(player)) {
       player.applyFix(player.findOverlapFix(this));

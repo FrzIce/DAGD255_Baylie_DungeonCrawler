@@ -43,7 +43,7 @@ class Bullet extends AABB {
   }
 
   void draw() {
-    fill(#FFF948);
+    fill(#000000);
     ellipse(x, y, w, h);
   }
 }
