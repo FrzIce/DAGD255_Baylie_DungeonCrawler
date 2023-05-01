@@ -1,8 +1,13 @@
 class Bullet extends AABB {
   float damage;
   float lifeTime = 4;
-  boolean isColliding;
-  
+  boolean colliding;
+  boolean pColliding;
+  float collisionIFrame = 1;
+  int hitPoints = 3;
+  ArrayList<Enemy> enemiesNotCollided = new ArrayList();
+
+
   Bullet(float x, float y, float angle, float damage) {
     this.x = x;
     this.y = y;
@@ -10,24 +15,35 @@ class Bullet extends AABB {
     setSize(8, 8);
     velocity = new PVector(1800, 1800);
     this.damage = random(damage, damage + 4);
-    isColliding = false;
+    colliding = false;
+    for (int j = 0; j < enemies.size(); j++) {
+      Enemy e = enemies.get(j);
+      enemiesNotCollided.add(e);
+    }
   }
-  
+
   void update() {
     lifeTime -= dt;
-    
+
     x += velocity.x * cos(angle) * dt;
     y += velocity.y * sin(angle) * dt;
-    
-    if(lifeTime <= 0) isDead = true;
+
+    //if (colliding == true) {
+    //  collisionIFrame -= dt;
+    //} else {
+    //  collisionIFrame = 1;
+    //}
+
+
+    if (lifeTime <= 0 || hitPoints <= 0) isDead = true;
     // PREP FOR NEXT FRAME
 
     super.update();
+    //pColliding = colliding;
   }
-  
+
   void draw() {
-    fill(#DB800F);
+    fill(#FFF948);
     ellipse(x, y, w, h);
   }
-  
 }

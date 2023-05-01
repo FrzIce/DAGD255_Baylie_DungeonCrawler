@@ -15,6 +15,10 @@ static public class Keyboard {
     public static final int DOWN = 40;
     public static final int SHIFT = 16;
     public static final int E = 69;
+    public static final int TAB = 9;
+    public static final int Z = 90;
+    public static final int X = 88;
+    public static final int C = 67;
     
     public static void update() {
       // Update the state of all keys in the previous frame to the state in the current frame.

@@ -5,21 +5,44 @@ class Player extends AABB {
   float playerSpeed = 300;
   boolean isFocused = false;
   boolean isHovered = false;
+  
+  int Element; //1 - Nature, 2 - Ice, 3 - Fire, 4 - Earth, 5 - Air 
+  int Weapon; 
+  
+  //Level up system
+  int level = 1; // starts at exp 100 plus 50 each time, etc 100, 150, 200
+  int levelUpToken = 0;
+  int exp = 0; // certain difference between levels - 1.5/2?
+  int expCap = 100;
+  //Attributes
+  int health = 50; // How much health the player has
+  float attack = 1; // influences how much damage is done against enemies
+  float defense = 1; // influences how much damage is reduced against you
+  //float speed = 10; // how fast you can move as well as how much stamina you have
+  //float luck; // increase chances to crits and more exp.
+  
 
 
   Player(float xPos, float yPos) {
     x = xPos;
     y = yPos;
     img = loadImage("myPlayer.png");
-    img2 = loadImage("myPlayer2.png");
     velocity = new PVector();
     setSize(106, 128);
     sprint = 1;
+    level = 1;
   }
 
   void update() {
 
     if (isFocused) {//UPDATE INPUT ACTIONS IF THIS PLAYER IS IN FOCUS
+
+      //println(player.x);
+      if(exp >= expCap){
+       exp -= expCap;
+       expCap += 50;
+       levelUpToken++;       
+      }
 
 
       calcAngleToMouse();
@@ -37,6 +60,22 @@ class Player extends AABB {
           camTarget.isFocused = true;
           this.isFocused = false;
         }
+      }
+      
+      if (Keyboard.onDown(Keyboard.Z)){
+        levelUpToken--;
+        level++;
+        health += 10;
+      }
+      if (Keyboard.onDown(Keyboard.X)){
+        levelUpToken--;
+        level++;
+        attack += 1;
+      }
+      if (Keyboard.onDown(Keyboard.C)){
+        levelUpToken--;
+        level++;
+        defense += 1;
       }
 
       if (Keyboard.isDown(Keyboard.A)) {
@@ -90,6 +129,14 @@ class Player extends AABB {
       image(img, -halfW, -halfH);
       popMatrix();
     }
+    
+    
+    //stroke(2);
+    //line(edgeL, edgeT, edgeL, edgeB);
+    //line(edgeR, edgeT, edgeR, edgeB);
+    //line(edgeL, edgeT, edgeR, edgeT);
+    //line(edgeL, edgeB, edgeR, edgeB);
+    //stroke(0);
   }
 
   void checkHover() {
